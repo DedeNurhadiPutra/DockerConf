@@ -54,6 +54,28 @@ services:
     networks:
       - laravel
 
+  artisan:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: artisan
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: ['php', 'artisan']
+    networks:
+      - laravel
+
+  npm:
+    image: node:latest
+    container_name: npm
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: ['npm']
+    networks:
+      - laravel
+
   # apache:
   #   build:
   #     context: .
